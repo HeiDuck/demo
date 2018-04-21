@@ -3,6 +3,7 @@ package com.agilecontrol.robotorder.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.redis.connection.RedisConnection;
 
 import com.agilecontrol.robotorder.demo.utils.DbUtils;
 
@@ -12,6 +13,15 @@ public class DemoApplication {
 		ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 		System.out.println("Hello World 嘿嘿丫丫");
 		DbUtils.applicationContext = context;
-		DbUtils.getConnection().set("usr:893".getBytes(), "893".getBytes());
+		RedisConnection connection = DbUtils.getConnection();
+		int i = 0;
+		String key = "usr:893";
+		while(true) {
+			key = key + i;
+			System.out.println("redis 设置值 key:" + key);
+			connection.set(key.getBytes(), String.valueOf(i++).getBytes());
+			System.out.println("redi usr:893对应的值:" + connection.get(key.getBytes()));
+		}
+		
 	}
 }
