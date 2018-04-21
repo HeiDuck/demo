@@ -18,8 +18,9 @@ public class DemoApplication {
 		RedisConnection connection = DbUtils.getConnection();
 		String key = "usr:893:list";
 		for(int i = 0;i < 100;i++) {
-			List list = connection.bRPop(500, key.getBytes());
-			System.out.println(list.toString());
+			List<byte[]> list = connection.bRPop(500, key.getBytes());
+			System.out.println("key:" + new String(list.get(0)));
+			System.out.println("value:" + new String(list.get(1)));
 			Thread.sleep(2000);
 		}
 //		for(int i = 0;i < 100;i++) {
