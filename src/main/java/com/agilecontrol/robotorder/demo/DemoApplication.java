@@ -1,5 +1,7 @@
 package com.agilecontrol.robotorder.demo;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -18,16 +20,16 @@ public class DemoApplication {
 		DbUtils.applicationContext = context;
 		RedisConnection connection = DbUtils.getConnection();
 		String key = "usr:893:list";
-//		for(int i = 0;i < 100;i++) {
-//			List<byte[]> list = connection.bRPop(500, key.getBytes());
-//			System.out.println("key:" + new String(list.get(0)));
-//			System.out.println("value:" + new String(list.get(1)));
-//			Thread.sleep(2000);
-//		}
-		for(int i = 0;i < 1000;i++) {
-			logger.debug("key--------------" + i);
-			connection.lPush(key.getBytes(), String.valueOf(i).getBytes());
+		long length = connection.lLen(key.getBytes());
+		while(length > 0) {
+			List<byte[]> list = connection.bRPop(500, key.getBytes());
+			System.out.println("key:" + new String(list.get(0)));
+			System.out.println("value:" + new String(list.get(1)));
+			Thread.sleep(2000);
 		}
-		
+//		for(int i = 0;i < 1000;i++) {
+//			logger.debug("key--------------" + i);
+//			connection.lPush(key.getBytes(), String.valueOf(i).getBytes());
+//		}
 	}
 }
