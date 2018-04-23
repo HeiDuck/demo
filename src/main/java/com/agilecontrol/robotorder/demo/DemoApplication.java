@@ -23,8 +23,8 @@ public class DemoApplication {
 		long length = connection.lLen(key.getBytes());
 		while(length > 0) {
 			List<byte[]> list = connection.bRPop(500, key.getBytes());
-			System.out.println("key:" + new String(list.get(0)));
-			System.out.println("value:" + new String(list.get(1)));
+			logger.debug("key:" + new String(list.get(0)));
+			logger.debug("value:" + new String(list.get(1)));
 			Thread.sleep(2000);
 		}
 //		for(int i = 0;i < 1000;i++) {
