@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-COPY . /usr/src/javaapp
+MAINTAINER 1446529778lsh@gmail.com
 WORKDIR /usr/java/app
 ADD *.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]

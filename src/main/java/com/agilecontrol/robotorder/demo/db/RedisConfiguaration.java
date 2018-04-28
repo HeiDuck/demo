@@ -43,6 +43,7 @@ public class RedisConfiguaration {
 		return redisPassword;
 	}
 
-	@Value("${spring.redis.port}")
 	private int port;
+	
+	
 }

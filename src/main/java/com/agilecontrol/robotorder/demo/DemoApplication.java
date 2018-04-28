@@ -21,15 +21,15 @@ public class DemoApplication {
 		RedisConnection connection = DbUtils.getConnection();
 		String key = "usr:893:list";
 		long length = connection.lLen(key.getBytes());
-		while(length > 0) {
-			List<byte[]> list = connection.bRPop(500, key.getBytes());
-			logger.debug("key:" + new String(list.get(0)));
-			logger.debug("value:" + new String(list.get(1)));
-			Thread.sleep(2000);
-		}
-//		for(int i = 0;i < 1000;i++) {
-//			logger.debug("key--------------" + i);
-//			connection.lPush(key.getBytes(), String.valueOf(i).getBytes());
+//		while(length > 0) {
+//			List<byte[]> list = connection.bRPop(500, key.getBytes());
+//			logger.debug("key:" + new String(list.get(0)));
+//			logger.debug("value:" + new String(list.get(1)));
+//			Thread.sleep(2000);
 //		}
+		for(int i = 0;i < 100000;i++) {
+			logger.debug("key--------------" + i);
+			connection.lPush(key.getBytes(), String.valueOf(i).getBytes());
+		}
 	}
 }
