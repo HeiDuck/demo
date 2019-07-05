@@ -3,14 +3,16 @@ package com.agilecontrol.robotorder.demo.db;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 
+@Lazy
 @Configuration
-public class RedisConfiguaration {
+public class RedisConfiguration {
 
 	@Bean
 	public RedisConnection connection(RedisConnectionFactory jedisConnectionFactory) {
@@ -43,6 +45,7 @@ public class RedisConfiguaration {
 		return redisPassword;
 	}
 
-	@Value("${spring.redis.port}")
 	private int port;
+	
+	
 }
